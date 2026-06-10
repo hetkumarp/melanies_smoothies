@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -14,8 +14,10 @@ name_on_order = st.text_input("Your Beautiful Name: ")
 # displaying a name in the bottom afer user types it
 st.write("The Name For Your Order:", name_on_order)
 
+
+cnx = st.connection("snowflake")
 # connecting to snowflake environment
-session = get_active_session()
+session = cnx.session()
 # connecting to fruit option table and making fruit name the options
 # we are assigning my_dataframe the fruit_name table
 my_dataframe = session.table("smoothies.public.fruit_options"). select(col("FRUIT_NAME"))
