@@ -53,5 +53,5 @@ if ingredients_list:
         # once submitted, it notifies the user
         st.success ("✅" + 'Your Smoothie Is Ordered, ' + name_on_order +"!")
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+#smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
+#sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
