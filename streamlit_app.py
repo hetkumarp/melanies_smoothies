@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-
+import requests  
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
@@ -34,6 +34,8 @@ if ingredients_list:
     # it saves that information into ingredients_string
     for fruit_chosen in ingredients_list: 
         ingredients_string += fruit_chosen + ' '
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     # creating a SQL statement which we will use to enter data/options into a table
     # we will insert the data into orders table into ingredients column
@@ -51,7 +53,5 @@ if ingredients_list:
         # once submitted, it notifies the user
         st.success ("✅" + 'Your Smoothie Is Ordered, ' + name_on_order +"!")
 
-import requests  
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
-#st.text(smoothiefroot_response.json())
 sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
