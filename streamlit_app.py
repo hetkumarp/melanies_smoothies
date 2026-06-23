@@ -34,7 +34,8 @@ if ingredients_list:
     # it saves that information into ingredients_string
     for fruit_chosen in ingredients_list: 
         ingredients_string += fruit_chosen + ' '
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        st.subheader(fruit_chosen + 'Nutrition Information')
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     # creating a SQL statement which we will use to enter data/options into a table
