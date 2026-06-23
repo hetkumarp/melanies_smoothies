@@ -21,8 +21,9 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 # connecting to fruit option table and making fruit name the options
 # we are assigning my_dataframe the fruit_name table
-my_dataframe = session.table("smoothies.public.fruit_options"). select(col("FRUIT_NAME"))
-
+my_dataframe = session.table("smoothies.public.fruit_options"). select(col("FRUIT_NAME"), col('SEARCH_ON'))
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop
 #creating the dropdown visual and assigning ingredients_list variable for that dropdown to store the information
 ingredients_list = st.multiselect("Choose Up To 5 Ingredients", my_dataframe, max_selections = 5 )
 
@@ -34,7 +35,7 @@ if ingredients_list:
     # it saves that information into ingredients_string
     for fruit_chosen in ingredients_list: 
         ingredients_string += fruit_chosen + ' '
-        st.subheader(fruit_chosen + 'Nutrition Information')
+        st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
